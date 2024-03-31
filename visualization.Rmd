@@ -1,0 +1,172 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+#install.packages(c("tidyverse", "dslabs"))
+library(tidyverse)
+library(dslabs)
+library(ggrepel)
+library(ggthemes)
+data("murders")
+```
+
+Plot function
+```{r}
+x = murders$population/10^6
+y = murders$total
+
+plot(x,y)
+```
+
+```{r}
+murder_rates <- murders$total/murders$population * 10^6
+hist(murder_rates)
+```
+
+GGPLOTS
+
+
+```{r}
+library(ggpubr)
+
+data("heights")
+str(heights)
+ggplot(data = heights, aes(height)) + geom_histogram(bins = 35) + theme_minimal()
+
+ggplot(data = heights, aes(height)) + geom_density(fill = 'blue', alpha = 0.3) + theme_minimal()
+
+ggplot(data = heights, aes(height, fill = sex)) + geom_density( alpha = 0.3) + theme_minimal()
+
+ggplot(data = heights, aes(y = height, x = sex, fill = sex)) + geom_boxplot( alpha = 0.3) + theme_minimal()
+
+ggplot(data = heights, aes(y = height, x = sex, fill = sex)) + geom_boxplot( alpha = 0.3) + theme_minimal() + stat_compare_means(method = 't.test')
+```
+
+
+
+```{r}
+#The object
+p <- ggplot(data = murders, aes(x = population/10^6, y = total))
+
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3)
+
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text_repel(aes(label = abb))
+
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text_repel(aes(label = abb)) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1, col = 'grey', linetype = 2)
+
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text_repel(aes(label = abb)) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1, col = 'grey', linetype = 2) +
+  scale_x_log10() +
+  scale_y_log10()
+
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text_repel(aes(label = abb)) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1, col = 'grey', linetype = 2) +
+  scale_x_log10() +
+  scale_y_log10() +
+  xlab("Populations in millions (log scale)") + 
+  ylab("Total number of murders (log scale)") +
+  ggtitle("US Gun Murders in 2010")
+
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text_repel(aes(label = abb)) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1, col = 'grey', linetype = 2) +
+  scale_x_log10() +
+  scale_y_log10() +
+  xlab("Populations in millions (log scale)") + 
+  ylab("Total number of murders (log scale)") +
+  ggtitle("US Gun Murders in 2010") +
+  theme_economist() +
+  scale_color_discrete(name = "Region") 
+
+
+```
+
+
+Gapminder
+
+```{r}
+data("gapminder")
+```
+
+```{r}
+head(gapminder)
+str(gapminder)
+```
+Which country has higher infant mortality rate?
+
+```{r}
+gapminder %>% 
+  filter(year == 2015 & country %in% c("Sri Lanka","Turkey")) |> 
+  select(country, infant_mortality)
+
+```
+
+Two Worlds
+the western world (Western Europe and North America), characterized by long life spans and small families, versus the developing world (Africa, Asia, and Latin America) characterized by short life spans and large families. But do the data support this dichotomous view?
+
+```{r}
+theme_set(theme_bw())
+
+gapminder %>% filter(year == 1962) %>% 
+  ggplot( aes(fertility, life_expectancy, color = continent)) +
+  geom_point() 
+
+gapminder %>% filter(year %in% c(1962, 2012)) %>% 
+  ggplot( aes(fertility, life_expectancy, color = continent)) +
+  geom_point() + facet_grid(~year)
+
+
+gapminder %>% filter(year %in% c(1962, 1980, 1990, 2000, 2012)) %>% 
+  ggplot( aes(fertility, life_expectancy, color = continent)) +
+  geom_point() + facet_wrap(~year,)
+
+```
+
+```{r}
+library(gganimate)
+gapminder %>% 
+  ggplot( aes(fertility, life_expectancy, color = continent)) +
+  geom_point()  + transition_time(year) + labs(title = "Year: {frame_time}")
+
+```
+
+```{r}
+ggplot(
+  gapminder, 
+  aes(x = gdp, y=life_expectancy, size = population, colour = continent)
+  ) +
+  geom_point(show.legend = FALSE, alpha = 0.7) +
+ 
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+
+
+gapminder %>% filter(year == 2000) %>% ggplot(aes(x = gdp, y=life_expectancy, size = population, colour = continent)) +
+  geom_point( alpha = 0.7) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy")
+
+gapminder  %>% ggplot(aes(x = gdp, y=life_expectancy, size = population, colour = continent)) +
+  geom_point( alpha = 0.7) +
+  scale_size(range = c(2, 12)) +
+  scale_x_log10() +
+  labs(x = "GDP per capita", y = "Life expectancy") +
+  transition_time(year) +
+  labs(title = "Year: {frame_time}")
+```
+

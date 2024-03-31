@@ -1,0 +1,293 @@
+---
+title: "R Journey"
+author: "Supun Manathunga"
+format: 
+  revealjs:
+    incremental: true
+    transition: none
+    background-transition: fade
+    slide-number: true
+editor: visual
+logo: logo.png
+css: logo.css
+---
+
+## R Journey
+
+`Introduction to data science with R`
+
+<https://github.com/ssm123ssm>
+
+## R and RStudio
+
+## R
+
+::: incremental
+> R is an open-source programming language and software environment designed for statistical computing, data analysis, and data visualization. It provides a powerful toolset for working with data, performing complex calculations, and creating high-quality graphics.
+:::
+
+-   The R console is an interactive command-line interface that allows you to directly execute R commands and see the results immediately. It serves as a simple environment for writing and testing R code, as well as exploring data and experimenting with various functions and packages.
+
+## R and RStudio
+
+> RStudio is a popular integrated development environment (IDE) for R. It provides a user-friendly interface that combines the R console, a code editor, and various panels for managing files, viewing data, plotting graphics, and accessing help documentation. RStudio streamlines the workflow for developing, debugging, and sharing R code and analyses.
+
+## Installing packages
+
+Packages are collections of R functions, data, and compiled code that provide additional tools and capabilities for specific tasks or domains. With thousands of packages available, you can easily enhance R's capabilities to suit your analytical needs.
+
+## Tidyverse
+
+<https://www.tidyverse.org/>
+
+The tidyverse is a collection of R packages designed for data science that share a common philosophy, grammar, and data structures. It provides a consistent and intuitive approach to data manipulation, exploration, and visualization.
+
+::: {.fragment .fade-in}
+`install.packages("tidyverse")`
+
+`install.packages("dslabs")`
+:::
+
+## RStudio workspace
+
+![](images/clipboard-515311276.png)
+
+## R Objects
+
+R Objects are the fundamental building blocks of the R language. They represent various data structures such as vectors, matrices, lists, and data frames, as well as functions and user-defined objects. R Objects store data, code, and results, allowing you to perform operations, calculations, and manipulations on them.
+
+## Case 1
+
+::: {.fragment .fade-in}
+$y = \beta_0 + \beta_1 x_1^2 + \beta_2 x_2$
+
+Given $\beta_0$ is 2, $\beta_1$ is 3 and $\beta_2$ is 4, calculate the value of $y$, when $x_1$ is 5 and $x_2$ is 6
+:::
+
+::: {.fragment .fade-in-then-out}
+```{r}
+#| echo: true
+b0 <-  2
+b1 <-  3
+b2 <-  4
+
+x1 <-  5
+x2 <-  6
+
+y <-  b0 + b1*x1^2 + b2*x2
+
+```
+:::
+
+::: fragment
+```{r}
+#| echo: true
+print(y)
+class(y)
+```
+:::
+
+## Functions
+
+In R, functions are first-class objects, meaning they can be treated like any other data object. This allows functions to be assigned to variables, passed as arguments to other functions, and even returned as outputs from functions.
+
+::: fragment
+``` r
+function_name <- function(argument1, argument2, ...) {
+
+  Function body
+    Sequence of operations and calculations
+    Using the arguments
+    
+return(output)
+
+}
+```
+:::
+
+## Case 2
+
+``` r
+solve <- function(x1, x2) {
+  b0 <-  2
+  b1 <-  3
+  b2 <-  4
+  y <-  b0 + b1*x1^2 + b2*x2
+  return(y)
+}
+
+y2 <- solve(5, 6)
+
+
+y2
+class(solve)
+class(y2)
+```
+
+## seq function and vectors
+
+The `seq()` function in R is used to **generate a sequence of numbers**. It allows you to create vectors of numbers within a specified range or following a specific pattern. The basic syntax is:
+
+`seq(from, to, by)`
+
+::: {.fragment .fade-in}
+For example, `seq(1, 10, by = 2)` will create a sequence of odd numbers from 1 to 9: `1, 3, 5, 7, 9`. The `seq()` function is versatile and can also generate sequences based on lengths or along specific vectors, making it a handy tool for creating numeric vectors in R.
+:::
+
+## Vectors
+
+\
+Vectors in R are fundamental data structures used to store collections of elements of the same data type. They can hold numeric, character, logical, or other types of data. Vectors can be created using the **`c()`** function, specifying elements separated by commas.
+
+::: {.fragment .fade-in}
+``` r
+vec <- c(1,2,3,4)
+class(vec)
+
+class(seq(1,10))
+```
+:::
+
+## Loops
+
+Loops in R are programming constructs used for iterating over a sequence of elements or performing repetitive tasks. The two main types of loops in R are for and while loops.
+
+-   For loops: These loops execute a block of code a predetermined number of times, iterating over elements of a sequence. They are useful when the number of iterations is known in advance.
+
+-   While loops: These loops continue iterating as long as a specified condition is true. They are suitable for situations where the number of iterations is not known beforehand.
+
+------------------------------------------------------------------------
+
+A **`for`** loop in R consists of three main components: the loop variable, the sequence to iterate over, and the code block to execute for each iteration. The basic structure is as follows:
+
+::: {.fragment .fade-in-then-out}
+``` r
+for (variable in sequence) {
+  # Code to execute for each iteration
+}
+```
+:::
+
+::: {.fragment .fade-in}
+### Find the sum of the first 100 numbers.
+:::
+
+::: {.fragment .fade-in-then-out}
+```{r}
+#| echo: true
+sum <- 0
+for (i in 1:100) {
+  sum <- sum + i
+}
+sum
+```
+:::
+
+::: {.fragment .fade-in}
+In R, there's often more than one way to accomplish a task or solve a problem.
+:::
+
+## More interesting ways...
+
+::: {.fragment .fade-in}
+Using a function.
+:::
+
+::: {.fragment .fade-in}
+The formula for getting the sum of the first $N$ integers is given by the arithmetic series formula:
+
+$sum = \frac{N \times (N + 1)}{2}$
+:::
+
+::: {.fragment .fade-in-then-out}
+```{r}
+#| echo: true
+getSum <- function(N) {
+  N*(N+1)/2
+}
+
+getSum(100)
+```
+:::
+
+::: {.fragment .fade-in}
+### Or even in one line!
+
+```{r}
+#| echo: true
+sum(1:100)
+```
+:::
+
+## Challenge
+
+### `Get the sum of the numbers divisible by 3, up to one million.`
+
+::: {.fragment .fade-in-then-out}
+```{r}
+#| echo: true
+sum <- 0
+for (i in 1:1000000) {
+  if (i %% 3 == 0) {
+    sum <- sum + i
+  }
+}
+```
+
+```{r}
+#| echo: true
+print(sum)
+```
+:::
+
+::: fragment
+### Or...
+
+```{r}
+#| echo: true
+sum(seq(3, 1000000, by = 3))
+```
+:::
+
+## Dataframes
+
+::: relative
+::: {.fragment .fade-in-then-out .upper}
+Dataframes in R are essential data structures used for storing tabular data in a structured format, similar to a spreadsheet or database table.
+
+They are two-dimensional objects consisting of rows and columns, where each column can contain data of different types, such as numeric, character, or factor.
+:::
+
+::: {.fragment .fade-in .upper}
+Dataframes can be created using functions like `data.frame()` or by importing data from external sources like CSV files using functions such as r`ead.csv()` or `read.table()`. Once created, dataframes allow for easy manipulation, analysis, and visualization of data using a wide range of built-in functions and packages.
+:::
+:::
+
+## Loading dataframes
+
+The `data()` function in R is used to load built-in datasets that come packaged with R or any installed packages. These datasets are often used for demonstration purposes or for practicing data analysis techniques.
+
+::: {.fragment .fade-in}
+```{r echo=TRUE}
+library('dslabs')
+
+data(murders)
+
+
+
+
+```
+:::
+
+::: space
+:::
+
+::: {.fragment .fade-in}
+```{r echo=TRUE}
+
+head(murders)
+
+```
+:::
+
+## Common functions used on dataframes

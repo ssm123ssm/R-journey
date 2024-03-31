@@ -1,0 +1,19 @@
+.reveal .slide-logo {
+  height: 100px !important;
+  width: 140px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.upper{
+  position: absolute;
+  top:0px;
+}
+
+.relative{
+  position: relative;
+}
+
+.space{
+  height: 20px;
+}
