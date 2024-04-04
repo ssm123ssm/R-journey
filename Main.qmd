@@ -16,7 +16,9 @@ css: logo.css
 
 `Introduction to data science with R`
 
-<https://github.com/ssm123ssm>
+<https://github.com/ssm123ssm/R-journey>
+
+# Part 1 - Basics
 
 ## R and RStudio
 
@@ -35,6 +37,10 @@ css: logo.css
 ## Installing packages
 
 Packages are collections of R functions, data, and compiled code that provide additional tools and capabilities for specific tasks or domains. With thousands of packages available, you can easily enhance R's capabilities to suit your analytical needs.
+
+::: {.fragment .fade-in}
+The currently loaded packages can be viewed using the `sessionInfo()` function.
+:::
 
 ## Tidyverse
 
@@ -273,9 +279,6 @@ library('dslabs')
 
 data(murders)
 
-
-
-
 ```
 :::
 
@@ -291,3 +294,546 @@ head(murders)
 :::
 
 ## Common functions used on dataframes
+
+::: {.fragment .fade-in}
+The `str()` function in R is used to display the internal structure of an R object. It provides a compact representation of the object's data type, dimensions (if applicable), and a glimpse of its contents.
+:::
+
+::: {.fragment .fade-in}
+```{r}
+#| echo: true
+ str(murders)
+```
+:::
+
+## Creating dataframes
+
+Dataframes can be created in R using the `data.frame()` function, which allows you to combine vectors of different types into a structured tabular format. You can specify column names and assign values to each column using the `data.frame()` function.
+
+::: {.fragment .fade-in}
+```{r}
+#| echo: true
+dataFrame = data.frame(a = 1:6, b = 2:7)
+```
+:::
+
+::: {.fragment .space}
+:::
+
+::: {.fragment .fade-in}
+```{r}
+#| echo: true
+library('dplyr')
+dataFrame %>% mutate(c = a + b)
+```
+:::
+
+## Other commonly used dplyr functions
+
+Here are some commonly used functions from the dplyr package in R:
+
+-   select(): Subset columns from a data frame.
+-   filter(): Subset rows based on conditions.
+-   mutate(): Add new columns or modify existing ones.
+-   summarise(): Compute summary statistics.
+-   group_by(): Group data by one or more variables.
+-   left_join(), right_join(), etc.: Combine data frames by matching rows.
+
+# Part 2 - Data Visualization
+
+## Exploratory Data Analysis (EDA)
+
+::: {.fragment .fade-in}
+Exploratory Data Analysis (EDA) is a crucial step in the data analysis process that involves examining and summarizing the main characteristics of a dataset.
+:::
+
+::: {.fragment .fade-in}
+It helps to gain insights, detect patterns, and identify potential issues or outliers in the data before proceeding with further analysis or modeling. EDA is an iterative process that typically involves visualizations and statistical summaries.
+:::
+
+## Motivation
+
+::: {.fragment .fade-in}
+The murders dataset contains statistics on population, murder rates, and other socio-economic factors for different states in the United States.
+:::
+
+::: {.fragment .fade-in}
+```{r}
+#| echo: true
+
+data("murders")
+head(murders)
+```
+:::
+
+::: {.fragment .fade-in}
+`What are the factors associated with murder rates?`
+:::
+
+------------------------------------------------------------------------
+
+![](images/clipboard-3944447522.png)
+
+## The `pipe` Operator
+
+::: {.fragment .fade-in}
+The pipe operator (`%>%`) is a convenient way to express a sequence of operations in a more readable format.
+:::
+
+::: {.fragment .fade-in}
+Instead of nesting functions inside one another, the pipe operator takes the output from one function and passes it as the first argument to the next function.
+:::
+
+------------------------------------------------------------------------
+
+<div>
+
+```{r}
+#| echo: true
+library(dplyr)
+library(dslabs)
+data(murders)
+
+names(murders)
+
+```
+
+</div>
+
+::: space
+:::
+
+::: fragment
+```{r}
+#| echo: true
+library(dplyr)
+library(dslabs)
+data(murders)
+
+murders %>%
+  arrange(desc(total)) %>%  
+  mutate(rate_per_million = total / population * 1e6) %>%  
+  select(state, rate_per_million)  %>% 
+  head()
+```
+:::
+
+------------------------------------------------------------------------
+
+<div>
+
+While R has powerful data visualization packages like ggplot2, it also comes with several built-in functions for creating basic graphs.
+
+</div>
+
+::: space
+:::
+
+::: fragment
+These functions can be useful for quick visualizations or when you don't need the advanced features of specialized packages.
+:::
+
+::: space
+:::
+
+::: fragment
+-   `hist()` : Create a histogram.
+-   `plot()` : Create a scatter plot.
+-   `barplot()` : Create a bar plot.
+-   `boxplot()` : Create a box plot.
+-   `pie()` : Create a pie chart.
+:::
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+hist(murders$total)
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+plot(murders$population/10^6, murders$total)
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+barplot(murders$total, names.arg = murders$state, las = 2)
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+boxplot(murders$total ~ murders$region)
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+
+pie(tapply(murders$total, murders$region, sum), 
+    labels = c("Northeast", "South", "North Central", "West"))
+
+```
+
+## `ggplot2` Package
+
+::: {.fragment .fade-in}
+The `ggplot2` package is one of the most popular and powerful data visualization packages in R.
+:::
+
+::: {.fragment .fade-in}
+It is based on the principles of the Grammar of Graphics, which provides a flexible and consistent framework for creating a wide range of statistical graphics.
+:::
+
+::: {.fragment .fade-in}
+With ggplot2, you can create highly customizable and publication-quality plots using a layered approach.
+:::
+
+::: {.fragment .fade-in}
+```{r}
+#| echo: true
+library(ggplot2)
+library(ggrepel)
+library(ggthemes)
+
+```
+:::
+
+------------------------------------------------------------------------
+
+### There are three main components to a ggplot2 plot:
+
+1.  Data: The dataset to be visualized.
+2.  Aesthetic mappings: The relationship between variables and visual properties.
+3.  Geometric objects (geoms): The visual elements that represent the data, such as points, lines, or bars.
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+
+ggplot(data = murders, aes(x = population/10^6, y = total))
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3)
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region))
+ 
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text(aes(label = abb))
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text(aes(label = abb)) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1, col = 'grey', linetype = 2)
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text(aes(label = abb)) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1, col = 'grey', linetype = 2)+
+  scale_x_log10() +
+  scale_y_log10()
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text(aes(label = abb)) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1, col = 'grey', linetype = 2)+
+  scale_x_log10() +
+  scale_y_log10() +
+  xlab("Populations in millions (log scale)") + 
+  ylab("Total number of murders (log scale)") +
+  ggtitle("US Gun Murders in 2010")
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text_repel(aes(label = abb)) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1, col = 'grey', linetype = 2)+
+  scale_x_log10() +
+  scale_y_log10() +
+  xlab("Populations in millions (log scale)") + 
+  ylab("Total number of murders (log scale)") +
+  ggtitle("US Gun Murders in 2010") 
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+p <- ggplot(data = murders, aes(x = population/10^6, y = total)) + 
+  geom_point(size = 3, aes(col = region)) +
+  geom_text_repel(aes(label = abb)) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1, col = 'grey', linetype = 2)+
+  scale_x_log10() +
+  scale_y_log10() +
+  xlab("Populations in millions (log scale)") + 
+  ylab("Total number of murders (log scale)") +
+  ggtitle("US Gun Murders in 2010") +
+  theme_economist()
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+p
+```
+
+## `Gapminder`
+
+Gapminder was founded on the realization that many widespread perceptions and beliefs about global development were simply not accurate or based on outdated information. Hans Rosling frequently referred to these as "devastating misconceptions."
+
+> You are probably wrong about it!
+
+## Two Worlds
+
+::: fragment
+The "Two World View" is one of the major myths or misconceptions that Gapminder has sought to dispel through its work on data visualization and global development analysis.
+:::
+
+::: fragment
+The Two World View refers to the oversimplified perception that the world is divided into two distinct groups:
+:::
+
+::: fragment
+-   The wealthy Western nations/first world (U.S., Western Europe, etc.)
+-   The poor developing nations/third world (Africa, Asia, Latin America, etc.)
+:::
+
+------------------------------------------------------------------------
+
+::: fragment
+> People in the "Third World" had very low life expectancies, while those in the "First World" lived much longer lives.
+:::
+
+::: fragment
+> High fertility rates causing overpopulation was primarily a problem in poor, developing countries.
+:::
+
+::: {.fragment .red}
+Again, you are probably wrong about it!
+:::
+
+::: fragment
+Lets visualize life expectancy and fertility rate of countries in 1962.
+:::
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+library(tidyverse)
+library(gapminder)
+library(ggplot2)
+theme_set(theme_bw())
+library(gt)
+gapminder <- dslabs::gapminder
+
+#create head of the data with gt 
+gt(gapminder %>% head())
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+filter(gapminder, year == 1962) |>
+  ggplot( aes(fertility, life_expectancy, color = continent)) +
+  geom_point(size = 3) 
+```
+
+::: fragment
+### Is it the same in 2012?
+:::
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: true
+filter(dslabs::gapminder, year %in% c(1962, 2012)) |>
+  ggplot( aes(fertility, life_expectancy, color = continent)) +
+  geom_point(size = 3) + facet_grid(~year)
+```
+
+------------------------------------------------------------------------
+
+::: {visibility="uncounted"}
+``` r
+library(gganimate)
+
+dslabs::gapminder  %>% ggplot(aes(x = fertility, y=life_expectancy, size = population, colour = continent)) +
+    geom_point( alpha = 0.7) +
+    scale_size(range = c(2, 12)) +
+    scale_x_log10() +
+    transition_time(year) +
+    labs(title = "Year: {frame_time}") + theme_minimal()
+```
+:::
+
+::: fragment
+![](images/an2.gif){width="460"}
+:::
+
+## GDP vs Life Expectancy
+
+## What is the relationship between GDP and life expectancy across countries and over time?
+
+```{r}
+#| echo: true
+#| eval: true
+dslabs::gapminder %>% filter(year == 2000) %>% head(10)  %>% gt()
+```
+
+------------------------------------------------------------------------
+
+## {auto-animate=true}
+
+```{r}
+#| echo: true
+#| eval: true
+dslabs::gapminder %>% filter(year == 2000) %>% 
+  ggplot()
+```
+
+## {auto-animate=true}
+
+```{r}
+#| echo: true
+#| eval: true
+dslabs::gapminder %>% filter(year == 2000) %>% 
+  ggplot(aes(x = gdp, 
+             y=life_expectancy))
+```
+
+## {auto-animate=true}
+
+```{r}
+#| echo: true
+#| eval: true
+dslabs::gapminder %>% filter(year == 2000) %>% 
+  ggplot(aes(x = gdp, 
+             y=life_expectancy)) +
+  geom_point()
+```
+
+## {auto-animate=true}
+
+```{r}
+#| echo: true
+#| eval: true
+dslabs::gapminder %>% filter(year == 2000) %>% 
+  ggplot(aes(x = gdp, 
+             y=life_expectancy)) +
+  geom_point() +
+  scale_x_log10()
+```
+
+## {auto-animate=true}
+
+```{r}
+#| echo: true
+#| eval: true
+dslabs::gapminder %>% filter(year == 2000) %>% 
+  ggplot(aes(x = gdp, 
+             y=life_expectancy, 
+             color = continent)) +
+  geom_point() +
+  scale_x_log10()
+```
+
+## {auto-animate=true}
+
+```{r}
+#| echo: true
+#| eval: true
+dslabs::gapminder %>% filter(year == 2000) %>% 
+  ggplot(aes(x = gdp, 
+             y=life_expectancy, 
+             color = continent, 
+             size = population)) +
+  geom_point() +
+  scale_x_log10()
+```
+
+
+## {auto-animate=true}
+
+```{r}
+#| echo: false
+#| eval: true
+dslabs::gapminder %>% filter(year %in% c(2000)) %>% 
+  ggplot(aes(x = gdp, 
+             y=life_expectancy, 
+             color = continent, 
+             size = population)) +
+  geom_point() +
+  geom_smooth(inherit.aes = F, aes(x = gdp, 
+             y=life_expectancy, 
+             ), method = 'lm') +
+  scale_x_log10() 
+  
+```
+
+
+## {auto-animate=true}
+
+```{r}
+#| echo: true
+#| eval: true
+dslabs::gapminder %>% filter(year %in% c(1962, 1980, 1990, 2000)) %>% 
+  ggplot(aes(x = gdp, 
+             y=life_expectancy, 
+             color = continent, 
+             size = population)) +
+  geom_point() +
+  scale_x_log10() +
+  facet_wrap(~year)
+```
+

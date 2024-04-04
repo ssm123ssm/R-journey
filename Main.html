@@ -405,7 +405,12 @@ Supun Manathunga
 <section id="r-journey" class="slide level2">
 <h2>R Journey</h2>
 <p><code>Introduction to data science with R</code></p>
-<p><a href="https://github.com/ssm123ssm" class="uri">https://github.com/ssm123ssm</a></p>
+<p><a href="https://github.com/ssm123ssm/R-journey" class="uri">https://github.com/ssm123ssm/R-journey</a></p>
+</section>
+<section>
+<section id="part-1---basics" class="title-slide slide level1 center">
+<h1>Part 1 - Basics</h1>
+
 </section>
 <section id="r-and-rstudio" class="slide level2">
 <h2>R and RStudio</h2>
@@ -430,6 +435,9 @@ Supun Manathunga
 <section id="installing-packages" class="slide level2">
 <h2>Installing packages</h2>
 <p>Packages are collections of R functions, data, and compiled code that provide additional tools and capabilities for specific tasks or domains. With thousands of packages available, you can easily enhance R’s capabilities to suit your analytical needs.</p>
+<div class="fragment fade-in">
+<p>The currently loaded packages can be viewed using the <code>sessionInfo()</code> function.</p>
+</div>
 </section>
 <section id="tidyverse" class="slide level2">
 <h2>Tidyverse</h2>
@@ -670,11 +678,1608 @@ Vectors in R are fundamental data structures used to store collections of elemen
 </section>
 <section id="common-functions-used-on-dataframes" class="slide level2">
 <h2>Common functions used on dataframes</h2>
-
-<img src="logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
-
+<div class="fragment fade-in">
+<p>The <code>str()</code> function in R is used to display the internal structure of an R object. It provides a compact representation of the object’s data type, dimensions (if applicable), and a glimpse of its contents.</p>
+</div>
+<div class="fragment fade-in">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a> <span class="fu">str</span>(murders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   51 obs. of  5 variables:
+ $ state     : chr  "Alabama" "Alaska" "Arizona" "Arkansas" ...
+ $ abb       : chr  "AL" "AK" "AZ" "AR" ...
+ $ region    : Factor w/ 4 levels "Northeast","South",..: 2 4 4 2 4 4 1 2 2 2 ...
+ $ population: num  4779736 710231 6392017 2915918 37253956 ...
+ $ total     : num  135 19 232 93 1257 ...</code></pre>
+</div>
+</div>
 </div>
 </section>
+<section id="creating-dataframes" class="slide level2">
+<h2>Creating dataframes</h2>
+<p>Dataframes can be created in R using the <code>data.frame()</code> function, which allows you to combine vectors of different types into a structured tabular format. You can specify column names and assign values to each column using the <code>data.frame()</code> function.</p>
+<div class="fragment fade-in">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>dataFrame <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">b =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="fragment space">
+
+</div>
+<div class="fragment fade-in">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">library</span>(<span class="st">'dplyr'</span>)</span>
+<span id="cb27-2"><a href="#cb27-2"></a>dataFrame <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">c =</span> a <span class="sc">+</span> b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  a b  c
+1 1 2  3
+2 2 3  5
+3 3 4  7
+4 4 5  9
+5 5 6 11
+6 6 7 13</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="other-commonly-used-dplyr-functions" class="slide level2">
+<h2>Other commonly used dplyr functions</h2>
+<p>Here are some commonly used functions from the dplyr package in R:</p>
+<ul>
+<li class="fragment">select(): Subset columns from a data frame.</li>
+<li class="fragment">filter(): Subset rows based on conditions.</li>
+<li class="fragment">mutate(): Add new columns or modify existing ones.</li>
+<li class="fragment">summarise(): Compute summary statistics.</li>
+<li class="fragment">group_by(): Group data by one or more variables.</li>
+<li class="fragment">left_join(), right_join(), etc.: Combine data frames by matching rows.</li>
+</ul>
+</section></section>
+<section>
+<section id="part-2---data-visualization" class="title-slide slide level1 center">
+<h1>Part 2 - Data Visualization</h1>
+
+</section>
+<section id="exploratory-data-analysis-eda" class="slide level2">
+<h2>Exploratory Data Analysis (EDA)</h2>
+<div class="fragment fade-in">
+<p>Exploratory Data Analysis (EDA) is a crucial step in the data analysis process that involves examining and summarizing the main characteristics of a dataset.</p>
+</div>
+<div class="fragment fade-in">
+<p>It helps to gain insights, detect patterns, and identify potential issues or outliers in the data before proceeding with further analysis or modeling. EDA is an iterative process that typically involves visualizations and statistical summaries.</p>
+</div>
+</section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<div class="fragment fade-in">
+<p>The murders dataset contains statistics on population, murder rates, and other socio-economic factors for different states in the United States.</p>
+</div>
+<div class="fragment fade-in">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">data</span>(<span class="st">"murders"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">head</span>(murders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       state abb region population total
+1    Alabama  AL  South    4779736   135
+2     Alaska  AK   West     710231    19
+3    Arizona  AZ   West    6392017   232
+4   Arkansas  AR  South    2915918    93
+5 California  CA   West   37253956  1257
+6   Colorado  CO   West    5029196    65</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment fade-in">
+<p><code>What are the factors associated with murder rates?</code></p>
+</div>
+</section>
+<section class="slide level2">
+
+
+<img data-src="images/clipboard-3944447522.png" class="r-stretch"></section>
+<section id="the-pipe-operator" class="slide level2">
+<h2>The <code>pipe</code> Operator</h2>
+<div class="fragment fade-in">
+<p>The pipe operator (<code>%&gt;%</code>) is a convenient way to express a sequence of operations in a more readable format.</p>
+</div>
+<div class="fragment fade-in">
+<p>Instead of nesting functions inside one another, the pipe operator takes the output from one function and passes it as the first argument to the next function.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="fu">data</span>(murders)</span>
+<span id="cb31-4"><a href="#cb31-4"></a></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="fu">names</span>(murders)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "state"      "abb"        "region"     "population" "total"     </code></pre>
+</div>
+</div>
+</div>
+<div class="space">
+
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">library</span>(dslabs)</span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="fu">data</span>(murders)</span>
+<span id="cb33-4"><a href="#cb33-4"></a></span>
+<span id="cb33-5"><a href="#cb33-5"></a>murders <span class="sc">%&gt;%</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(total)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb33-7"><a href="#cb33-7"></a>  <span class="fu">mutate</span>(<span class="at">rate_per_million =</span> total <span class="sc">/</span> population <span class="sc">*</span> <span class="fl">1e6</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb33-8"><a href="#cb33-8"></a>  <span class="fu">select</span>(state, rate_per_million)  <span class="sc">%&gt;%</span> </span>
+<span id="cb33-9"><a href="#cb33-9"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         state rate_per_million
+1   California         33.74138
+2        Texas         32.01360
+3      Florida         33.98069
+4     New York         26.67960
+5 Pennsylvania         35.97751
+6     Michigan         41.78622</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div>
+<p>While R has powerful data visualization packages like ggplot2, it also comes with several built-in functions for creating basic graphs.</p>
+</div>
+<div class="space">
+
+</div>
+<div class="fragment">
+<p>These functions can be useful for quick visualizations or when you don’t need the advanced features of specialized packages.</p>
+</div>
+<div class="space">
+
+</div>
+<div class="fragment">
+<ul>
+<li class="fragment"><code>hist()</code> : Create a histogram.</li>
+<li class="fragment"><code>plot()</code> : Create a scatter plot.</li>
+<li class="fragment"><code>barplot()</code> : Create a bar plot.</li>
+<li class="fragment"><code>boxplot()</code> : Create a box plot.</li>
+<li class="fragment"><code>pie()</code> : Create a pie chart.</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">hist</span>(murders<span class="sc">$</span>total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">plot</span>(murders<span class="sc">$</span>population<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, murders<span class="sc">$</span>total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">barplot</span>(murders<span class="sc">$</span>total, <span class="at">names.arg =</span> murders<span class="sc">$</span>state, <span class="at">las =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">boxplot</span>(murders<span class="sc">$</span>total <span class="sc">~</span> murders<span class="sc">$</span>region)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">pie</span>(<span class="fu">tapply</span>(murders<span class="sc">$</span>total, murders<span class="sc">$</span>region, sum), </span>
+<span id="cb39-2"><a href="#cb39-2"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Northeast"</span>, <span class="st">"South"</span>, <span class="st">"North Central"</span>, <span class="st">"West"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
+<section id="ggplot2-package" class="slide level2">
+<h2><code>ggplot2</code> Package</h2>
+<div class="fragment fade-in">
+<p>The <code>ggplot2</code> package is one of the most popular and powerful data visualization packages in R.</p>
+</div>
+<div class="fragment fade-in">
+<p>It is based on the principles of the Grammar of Graphics, which provides a flexible and consistent framework for creating a wide range of statistical graphics.</p>
+</div>
+<div class="fragment fade-in">
+<p>With ggplot2, you can create highly customizable and publication-quality plots using a layered approach.</p>
+</div>
+<div class="fragment fade-in">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb40-3"><a href="#cb40-3"></a><span class="fu">library</span>(ggthemes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="there-are-three-main-components-to-a-ggplot2-plot">There are three main components to a ggplot2 plot:</h3>
+<ol type="1">
+<li class="fragment">Data: The dataset to be visualized.</li>
+<li class="fragment">Aesthetic mappings: The relationship between variables and visual properties.</li>
+<li class="fragment">Geometric objects (geoms): The visual elements that represent the data, such as points, lines, or bars.</li>
+</ol>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> murders, <span class="fu">aes</span>(<span class="at">x =</span> population<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">y =</span> total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> murders, <span class="fu">aes</span>(<span class="at">x =</span> population<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">y =</span> total)) <span class="sc">+</span> </span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> murders, <span class="fu">aes</span>(<span class="at">x =</span> population<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">y =</span> total)) <span class="sc">+</span> </span>
+<span id="cb43-2"><a href="#cb43-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">col =</span> region))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-25-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> murders, <span class="fu">aes</span>(<span class="at">x =</span> population<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">y =</span> total)) <span class="sc">+</span> </span>
+<span id="cb44-2"><a href="#cb44-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">col =</span> region)) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> abb))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> murders, <span class="fu">aes</span>(<span class="at">x =</span> population<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">y =</span> total)) <span class="sc">+</span> </span>
+<span id="cb45-2"><a href="#cb45-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">col =</span> region)) <span class="sc">+</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> abb)) <span class="sc">+</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">'grey'</span>, <span class="at">linetype =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-27-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> murders, <span class="fu">aes</span>(<span class="at">x =</span> population<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">y =</span> total)) <span class="sc">+</span> </span>
+<span id="cb46-2"><a href="#cb46-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">col =</span> region)) <span class="sc">+</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> abb)) <span class="sc">+</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">'grey'</span>, <span class="at">linetype =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb46-6"><a href="#cb46-6"></a>  <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> murders, <span class="fu">aes</span>(<span class="at">x =</span> population<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">y =</span> total)) <span class="sc">+</span> </span>
+<span id="cb47-2"><a href="#cb47-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">col =</span> region)) <span class="sc">+</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> abb)) <span class="sc">+</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">'grey'</span>, <span class="at">linetype =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb47-7"><a href="#cb47-7"></a>  <span class="fu">xlab</span>(<span class="st">"Populations in millions (log scale)"</span>) <span class="sc">+</span> </span>
+<span id="cb47-8"><a href="#cb47-8"></a>  <span class="fu">ylab</span>(<span class="st">"Total number of murders (log scale)"</span>) <span class="sc">+</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a>  <span class="fu">ggtitle</span>(<span class="st">"US Gun Murders in 2010"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> murders, <span class="fu">aes</span>(<span class="at">x =</span> population<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">y =</span> total)) <span class="sc">+</span> </span>
+<span id="cb48-2"><a href="#cb48-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">col =</span> region)) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> abb)) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">'grey'</span>, <span class="at">linetype =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb48-6"><a href="#cb48-6"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb48-7"><a href="#cb48-7"></a>  <span class="fu">xlab</span>(<span class="st">"Populations in millions (log scale)"</span>) <span class="sc">+</span> </span>
+<span id="cb48-8"><a href="#cb48-8"></a>  <span class="fu">ylab</span>(<span class="st">"Total number of murders (log scale)"</span>) <span class="sc">+</span></span>
+<span id="cb48-9"><a href="#cb48-9"></a>  <span class="fu">ggtitle</span>(<span class="st">"US Gun Murders in 2010"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> murders, <span class="fu">aes</span>(<span class="at">x =</span> population<span class="sc">/</span><span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">y =</span> total)) <span class="sc">+</span> </span>
+<span id="cb49-2"><a href="#cb49-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">col =</span> region)) <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3"></a>  <span class="fu">geom_text_repel</span>(<span class="fu">aes</span>(<span class="at">label =</span> abb)) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">'grey'</span>, <span class="at">linetype =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb49-5"><a href="#cb49-5"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb49-6"><a href="#cb49-6"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb49-7"><a href="#cb49-7"></a>  <span class="fu">xlab</span>(<span class="st">"Populations in millions (log scale)"</span>) <span class="sc">+</span> </span>
+<span id="cb49-8"><a href="#cb49-8"></a>  <span class="fu">ylab</span>(<span class="st">"Total number of murders (log scale)"</span>) <span class="sc">+</span></span>
+<span id="cb49-9"><a href="#cb49-9"></a>  <span class="fu">ggtitle</span>(<span class="st">"US Gun Murders in 2010"</span>) <span class="sc">+</span></span>
+<span id="cb49-10"><a href="#cb49-10"></a>  <span class="fu">theme_economist</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"></section>
+<section id="gapminder" class="slide level2">
+<h2><code>Gapminder</code></h2>
+<p>Gapminder was founded on the realization that many widespread perceptions and beliefs about global development were simply not accurate or based on outdated information. Hans Rosling frequently referred to these as “devastating misconceptions.”</p>
+<blockquote>
+<p>You are probably wrong about it!</p>
+</blockquote>
+</section>
+<section id="two-worlds" class="slide level2">
+<h2>Two Worlds</h2>
+<div class="fragment">
+<p>The “Two World View” is one of the major myths or misconceptions that Gapminder has sought to dispel through its work on data visualization and global development analysis.</p>
+</div>
+<div class="fragment">
+<p>The Two World View refers to the oversimplified perception that the world is divided into two distinct groups:</p>
+</div>
+<div class="fragment">
+<ul>
+<li class="fragment">The wealthy Western nations/first world (U.S., Western Europe, etc.)</li>
+<li class="fragment">The poor developing nations/third world (Africa, Asia, Latin America, etc.)</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="fragment">
+<blockquote>
+<p>People in the “Third World” had very low life expectancies, while those in the “First World” lived much longer lives.</p>
+</blockquote>
+</div>
+<div class="fragment">
+<blockquote>
+<p>High fertility rates causing overpopulation was primarily a problem in poor, developing countries.</p>
+</blockquote>
+</div>
+<div class="fragment red">
+<p>Again, you are probably wrong about it!</p>
+</div>
+<div class="fragment">
+<p>Lets visualize life expectancy and fertility rate of countries in 1962.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb51-2"><a href="#cb51-2"></a><span class="fu">library</span>(gapminder)</span>
+<span id="cb51-3"><a href="#cb51-3"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb51-4"><a href="#cb51-4"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
+<span id="cb51-5"><a href="#cb51-5"></a><span class="fu">library</span>(gt)</span>
+<span id="cb51-6"><a href="#cb51-6"></a>gapminder <span class="ot">&lt;-</span> dslabs<span class="sc">::</span>gapminder</span>
+<span id="cb51-7"><a href="#cb51-7"></a></span>
+<span id="cb51-8"><a href="#cb51-8"></a><span class="co">#create head of the data with gt </span></span>
+<span id="cb51-9"><a href="#cb51-9"></a><span class="fu">gt</span>(gapminder <span class="sc">%&gt;%</span> <span class="fu">head</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="zzdfksqnrz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zzdfksqnrz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#zzdfksqnrz thead, #zzdfksqnrz tbody, #zzdfksqnrz tfoot, #zzdfksqnrz tr, #zzdfksqnrz td, #zzdfksqnrz th {
+  border-style: none;
+}
+
+#zzdfksqnrz p {
+  margin: 0;
+  padding: 0;
+}
+
+#zzdfksqnrz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#zzdfksqnrz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zzdfksqnrz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zzdfksqnrz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zzdfksqnrz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zzdfksqnrz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zzdfksqnrz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zzdfksqnrz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zzdfksqnrz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#zzdfksqnrz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#zzdfksqnrz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zzdfksqnrz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zzdfksqnrz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zzdfksqnrz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zzdfksqnrz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zzdfksqnrz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zzdfksqnrz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zzdfksqnrz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#zzdfksqnrz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zzdfksqnrz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zzdfksqnrz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zzdfksqnrz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zzdfksqnrz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zzdfksqnrz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zzdfksqnrz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zzdfksqnrz .gt_left {
+  text-align: left;
+}
+
+#zzdfksqnrz .gt_center {
+  text-align: center;
+}
+
+#zzdfksqnrz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zzdfksqnrz .gt_font_normal {
+  font-weight: normal;
+}
+
+#zzdfksqnrz .gt_font_bold {
+  font-weight: bold;
+}
+
+#zzdfksqnrz .gt_font_italic {
+  font-style: italic;
+}
+
+#zzdfksqnrz .gt_super {
+  font-size: 65%;
+}
+
+#zzdfksqnrz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#zzdfksqnrz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zzdfksqnrz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#zzdfksqnrz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#zzdfksqnrz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#zzdfksqnrz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#zzdfksqnrz .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="country">country</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="year">year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="infant_mortality">infant_mortality</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="life_expectancy">life_expectancy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="fertility">fertility</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="population">population</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="gdp">gdp</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="continent">continent</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="region">region</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="country" class="gt_row gt_center">Albania</td>
+<td headers="year" class="gt_row gt_right">1960</td>
+<td headers="infant_mortality" class="gt_row gt_right">115.40</td>
+<td headers="life_expectancy" class="gt_row gt_right">62.87</td>
+<td headers="fertility" class="gt_row gt_right">6.19</td>
+<td headers="population" class="gt_row gt_right">1636054</td>
+<td headers="gdp" class="gt_row gt_right">NA</td>
+<td headers="continent" class="gt_row gt_center">Europe</td>
+<td headers="region" class="gt_row gt_center">Southern Europe</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Algeria</td>
+<td headers="year" class="gt_row gt_right">1960</td>
+<td headers="infant_mortality" class="gt_row gt_right">148.20</td>
+<td headers="life_expectancy" class="gt_row gt_right">47.50</td>
+<td headers="fertility" class="gt_row gt_right">7.65</td>
+<td headers="population" class="gt_row gt_right">11124892</td>
+<td headers="gdp" class="gt_row gt_right">13828152297</td>
+<td headers="continent" class="gt_row gt_center">Africa</td>
+<td headers="region" class="gt_row gt_center">Northern Africa</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Angola</td>
+<td headers="year" class="gt_row gt_right">1960</td>
+<td headers="infant_mortality" class="gt_row gt_right">208.00</td>
+<td headers="life_expectancy" class="gt_row gt_right">35.98</td>
+<td headers="fertility" class="gt_row gt_right">7.32</td>
+<td headers="population" class="gt_row gt_right">5270844</td>
+<td headers="gdp" class="gt_row gt_right">NA</td>
+<td headers="continent" class="gt_row gt_center">Africa</td>
+<td headers="region" class="gt_row gt_center">Middle Africa</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Antigua and Barbuda</td>
+<td headers="year" class="gt_row gt_right">1960</td>
+<td headers="infant_mortality" class="gt_row gt_right">NA</td>
+<td headers="life_expectancy" class="gt_row gt_right">62.97</td>
+<td headers="fertility" class="gt_row gt_right">4.43</td>
+<td headers="population" class="gt_row gt_right">54681</td>
+<td headers="gdp" class="gt_row gt_right">NA</td>
+<td headers="continent" class="gt_row gt_center">Americas</td>
+<td headers="region" class="gt_row gt_center">Caribbean</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Argentina</td>
+<td headers="year" class="gt_row gt_right">1960</td>
+<td headers="infant_mortality" class="gt_row gt_right">59.87</td>
+<td headers="life_expectancy" class="gt_row gt_right">65.39</td>
+<td headers="fertility" class="gt_row gt_right">3.11</td>
+<td headers="population" class="gt_row gt_right">20619075</td>
+<td headers="gdp" class="gt_row gt_right">108322326649</td>
+<td headers="continent" class="gt_row gt_center">Americas</td>
+<td headers="region" class="gt_row gt_center">South America</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Armenia</td>
+<td headers="year" class="gt_row gt_right">1960</td>
+<td headers="infant_mortality" class="gt_row gt_right">NA</td>
+<td headers="life_expectancy" class="gt_row gt_right">66.86</td>
+<td headers="fertility" class="gt_row gt_right">4.55</td>
+<td headers="population" class="gt_row gt_right">1867396</td>
+<td headers="gdp" class="gt_row gt_right">NA</td>
+<td headers="continent" class="gt_row gt_center">Asia</td>
+<td headers="region" class="gt_row gt_center">Western Asia</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">filter</span>(gapminder, year <span class="sc">==</span> <span class="dv">1962</span>) <span class="sc">|&gt;</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(fertility, life_expectancy, <span class="at">color =</span> continent)) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="#cb52-3"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"><div class="fragment">
+<!-- -->
+<h3 id="is-it-the-same-in-2012">Is it the same in 2012?</h3>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">filter</span>(dslabs<span class="sc">::</span>gapminder, year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1962</span>, <span class="dv">2012</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(fertility, life_expectancy, <span class="at">color =</span> continent)) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="sc">~</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-35-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+
+<div data-visibility="uncounted">
+<div class="sourceCode" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="fu">library</span>(gganimate)</span>
+<span id="cb54-2"><a href="#cb54-2"></a></span>
+<span id="cb54-3"><a href="#cb54-3"></a>dslabs<span class="sc">::</span>gapminder  <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fertility, <span class="at">y=</span>life_expectancy, <span class="at">size =</span> population, <span class="at">colour =</span> continent)) <span class="sc">+</span></span>
+<span id="cb54-4"><a href="#cb54-4"></a>    <span class="fu">geom_point</span>( <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb54-5"><a href="#cb54-5"></a>    <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">12</span>)) <span class="sc">+</span></span>
+<span id="cb54-6"><a href="#cb54-6"></a>    <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb54-7"><a href="#cb54-7"></a>    <span class="fu">transition_time</span>(year) <span class="sc">+</span></span>
+<span id="cb54-8"><a href="#cb54-8"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Year: {frame_time}"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p><img data-src="images/an2.gif" width="460"></p>
+</div>
+</section>
+<section id="gdp-vs-life-expectancy" class="slide level2">
+<h2>GDP vs Life Expectancy</h2>
+</section>
+<section id="what-is-the-relationship-between-gdp-and-life-expectancy-across-countries-and-over-time" class="slide level2">
+<h2>What is the relationship between GDP and life expectancy across countries and over time?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>dslabs<span class="sc">::</span>gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">10</span>)  <span class="sc">%&gt;%</span> <span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="iqrnfnkizj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iqrnfnkizj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#iqrnfnkizj thead, #iqrnfnkizj tbody, #iqrnfnkizj tfoot, #iqrnfnkizj tr, #iqrnfnkizj td, #iqrnfnkizj th {
+  border-style: none;
+}
+
+#iqrnfnkizj p {
+  margin: 0;
+  padding: 0;
+}
+
+#iqrnfnkizj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#iqrnfnkizj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#iqrnfnkizj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#iqrnfnkizj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#iqrnfnkizj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#iqrnfnkizj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#iqrnfnkizj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#iqrnfnkizj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#iqrnfnkizj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#iqrnfnkizj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#iqrnfnkizj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#iqrnfnkizj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#iqrnfnkizj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#iqrnfnkizj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#iqrnfnkizj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iqrnfnkizj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#iqrnfnkizj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#iqrnfnkizj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#iqrnfnkizj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iqrnfnkizj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#iqrnfnkizj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iqrnfnkizj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#iqrnfnkizj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iqrnfnkizj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iqrnfnkizj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iqrnfnkizj .gt_left {
+  text-align: left;
+}
+
+#iqrnfnkizj .gt_center {
+  text-align: center;
+}
+
+#iqrnfnkizj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#iqrnfnkizj .gt_font_normal {
+  font-weight: normal;
+}
+
+#iqrnfnkizj .gt_font_bold {
+  font-weight: bold;
+}
+
+#iqrnfnkizj .gt_font_italic {
+  font-style: italic;
+}
+
+#iqrnfnkizj .gt_super {
+  font-size: 65%;
+}
+
+#iqrnfnkizj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#iqrnfnkizj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#iqrnfnkizj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#iqrnfnkizj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#iqrnfnkizj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#iqrnfnkizj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#iqrnfnkizj .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="country">country</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="year">year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="infant_mortality">infant_mortality</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="life_expectancy">life_expectancy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="fertility">fertility</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="population">population</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="gdp">gdp</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="continent">continent</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="region">region</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="country" class="gt_row gt_center">Albania</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="infant_mortality" class="gt_row gt_right">23.2</td>
+<td headers="life_expectancy" class="gt_row gt_right">74.70</td>
+<td headers="fertility" class="gt_row gt_right">2.38</td>
+<td headers="population" class="gt_row gt_right">3121965</td>
+<td headers="gdp" class="gt_row gt_right">3686649387</td>
+<td headers="continent" class="gt_row gt_center">Europe</td>
+<td headers="region" class="gt_row gt_center">Southern Europe</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Algeria</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="infant_mortality" class="gt_row gt_right">33.9</td>
+<td headers="life_expectancy" class="gt_row gt_right">73.30</td>
+<td headers="fertility" class="gt_row gt_right">2.51</td>
+<td headers="population" class="gt_row gt_right">31183658</td>
+<td headers="gdp" class="gt_row gt_right">54790058957</td>
+<td headers="continent" class="gt_row gt_center">Africa</td>
+<td headers="region" class="gt_row gt_center">Northern Africa</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Angola</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="infant_mortality" class="gt_row gt_right">128.3</td>
+<td headers="life_expectancy" class="gt_row gt_right">52.30</td>
+<td headers="fertility" class="gt_row gt_right">6.84</td>
+<td headers="population" class="gt_row gt_right">15058638</td>
+<td headers="gdp" class="gt_row gt_right">9129180361</td>
+<td headers="continent" class="gt_row gt_center">Africa</td>
+<td headers="region" class="gt_row gt_center">Middle Africa</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Antigua and Barbuda</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="infant_mortality" class="gt_row gt_right">13.8</td>
+<td headers="life_expectancy" class="gt_row gt_right">73.80</td>
+<td headers="fertility" class="gt_row gt_right">2.32</td>
+<td headers="population" class="gt_row gt_right">77648</td>
+<td headers="gdp" class="gt_row gt_right">802526701</td>
+<td headers="continent" class="gt_row gt_center">Americas</td>
+<td headers="region" class="gt_row gt_center">Caribbean</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Argentina</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="infant_mortality" class="gt_row gt_right">18.0</td>
+<td headers="life_expectancy" class="gt_row gt_right">74.20</td>
+<td headers="fertility" class="gt_row gt_right">2.48</td>
+<td headers="population" class="gt_row gt_right">37057453</td>
+<td headers="gdp" class="gt_row gt_right">284203745280</td>
+<td headers="continent" class="gt_row gt_center">Americas</td>
+<td headers="region" class="gt_row gt_center">South America</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Armenia</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="infant_mortality" class="gt_row gt_right">26.6</td>
+<td headers="life_expectancy" class="gt_row gt_right">71.30</td>
+<td headers="fertility" class="gt_row gt_right">1.30</td>
+<td headers="population" class="gt_row gt_right">3076098</td>
+<td headers="gdp" class="gt_row gt_right">1911563665</td>
+<td headers="continent" class="gt_row gt_center">Asia</td>
+<td headers="region" class="gt_row gt_center">Western Asia</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Aruba</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="infant_mortality" class="gt_row gt_right">NA</td>
+<td headers="life_expectancy" class="gt_row gt_right">73.78</td>
+<td headers="fertility" class="gt_row gt_right">1.87</td>
+<td headers="population" class="gt_row gt_right">90858</td>
+<td headers="gdp" class="gt_row gt_right">1858659293</td>
+<td headers="continent" class="gt_row gt_center">Americas</td>
+<td headers="region" class="gt_row gt_center">Caribbean</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Australia</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="infant_mortality" class="gt_row gt_right">5.1</td>
+<td headers="life_expectancy" class="gt_row gt_right">79.80</td>
+<td headers="fertility" class="gt_row gt_right">1.76</td>
+<td headers="population" class="gt_row gt_right">19107251</td>
+<td headers="gdp" class="gt_row gt_right">416887521196</td>
+<td headers="continent" class="gt_row gt_center">Oceania</td>
+<td headers="region" class="gt_row gt_center">Australia and New Zealand</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Austria</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="infant_mortality" class="gt_row gt_right">4.6</td>
+<td headers="life_expectancy" class="gt_row gt_right">78.20</td>
+<td headers="fertility" class="gt_row gt_right">1.37</td>
+<td headers="population" class="gt_row gt_right">8050884</td>
+<td headers="gdp" class="gt_row gt_right">192070749954</td>
+<td headers="continent" class="gt_row gt_center">Europe</td>
+<td headers="region" class="gt_row gt_center">Western Europe</td></tr>
+    <tr><td headers="country" class="gt_row gt_center">Azerbaijan</td>
+<td headers="year" class="gt_row gt_right">2000</td>
+<td headers="infant_mortality" class="gt_row gt_right">60.6</td>
+<td headers="life_expectancy" class="gt_row gt_right">66.50</td>
+<td headers="fertility" class="gt_row gt_right">2.05</td>
+<td headers="population" class="gt_row gt_right">8117742</td>
+<td headers="gdp" class="gt_row gt_right">5272617196</td>
+<td headers="continent" class="gt_row gt_center">Asia</td>
+<td headers="region" class="gt_row gt_center">Western Asia</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="section" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb56-1" class="hljs-ln-code"><a href="#cb56-1"></a>dslabs<span class="sc">::</span>gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb56-2" class="hljs-ln-code"><a href="#cb56-2"></a>  <span class="fu">ggplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-37-1.png" width="960" class="r-stretch"></section>
+<section id="section-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb57-1" class="hljs-ln-code"><a href="#cb57-1"></a>dslabs<span class="sc">::</span>gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb57-2" class="hljs-ln-code"><a href="#cb57-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdp, </span>
+<span id="cb57-3" class="hljs-ln-code"><a href="#cb57-3"></a>             <span class="at">y=</span>life_expectancy))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-38-1.png" width="960" class="r-stretch"></section>
+<section id="section-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb58-1" class="hljs-ln-code"><a href="#cb58-1"></a>dslabs<span class="sc">::</span>gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-2" class="hljs-ln-code"><a href="#cb58-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdp, </span>
+<span id="cb58-3" class="hljs-ln-code"><a href="#cb58-3"></a>             <span class="at">y=</span>life_expectancy)) <span class="sc">+</span></span>
+<span id="cb58-4" class="hljs-ln-code"><a href="#cb58-4"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-39-1.png" width="960" class="r-stretch"></section>
+<section id="section-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb59-1" class="hljs-ln-code"><a href="#cb59-1"></a>dslabs<span class="sc">::</span>gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-2" class="hljs-ln-code"><a href="#cb59-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdp, </span>
+<span id="cb59-3" class="hljs-ln-code"><a href="#cb59-3"></a>             <span class="at">y=</span>life_expectancy)) <span class="sc">+</span></span>
+<span id="cb59-4" class="hljs-ln-code"><a href="#cb59-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb59-5" class="hljs-ln-code"><a href="#cb59-5"></a>  <span class="fu">scale_x_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch"></section>
+<section id="section-4" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb60-1" class="hljs-ln-code"><a href="#cb60-1"></a>dslabs<span class="sc">::</span>gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb60-2" class="hljs-ln-code"><a href="#cb60-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdp, </span>
+<span id="cb60-3" class="hljs-ln-code"><a href="#cb60-3"></a>             <span class="at">y=</span>life_expectancy, </span>
+<span id="cb60-4" class="hljs-ln-code"><a href="#cb60-4"></a>             <span class="at">color =</span> continent)) <span class="sc">+</span></span>
+<span id="cb60-5" class="hljs-ln-code"><a href="#cb60-5"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb60-6" class="hljs-ln-code"><a href="#cb60-6"></a>  <span class="fu">scale_x_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" class="r-stretch"></section>
+<section id="section-5" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb61-1" class="hljs-ln-code"><a href="#cb61-1"></a>dslabs<span class="sc">::</span>gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb61-2" class="hljs-ln-code"><a href="#cb61-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdp, </span>
+<span id="cb61-3" class="hljs-ln-code"><a href="#cb61-3"></a>             <span class="at">y=</span>life_expectancy, </span>
+<span id="cb61-4" class="hljs-ln-code"><a href="#cb61-4"></a>             <span class="at">color =</span> continent, </span>
+<span id="cb61-5" class="hljs-ln-code"><a href="#cb61-5"></a>             <span class="at">size =</span> population)) <span class="sc">+</span></span>
+<span id="cb61-6" class="hljs-ln-code"><a href="#cb61-6"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb61-7" class="hljs-ln-code"><a href="#cb61-7"></a>  <span class="fu">scale_x_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-42-1.png" width="960" class="r-stretch"></section>
+<section id="section-6" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+
+<img data-src="Main_files/figure-revealjs/unnamed-chunk-43-1.png" width="960" class="r-stretch"></section>
+<section id="section-7" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode r hljs"><span id="cb62-1" class="hljs-ln-code"><a href="#cb62-1"></a>dslabs<span class="sc">::</span>gapminder <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1962</span>, <span class="dv">1980</span>, <span class="dv">1990</span>, <span class="dv">2000</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb62-2" class="hljs-ln-code"><a href="#cb62-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gdp, </span>
+<span id="cb62-3" class="hljs-ln-code"><a href="#cb62-3"></a>             <span class="at">y=</span>life_expectancy, </span>
+<span id="cb62-4" class="hljs-ln-code"><a href="#cb62-4"></a>             <span class="at">color =</span> continent, </span>
+<span id="cb62-5" class="hljs-ln-code"><a href="#cb62-5"></a>             <span class="at">size =</span> population)) <span class="sc">+</span></span>
+<span id="cb62-6" class="hljs-ln-code"><a href="#cb62-6"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb62-7" class="hljs-ln-code"><a href="#cb62-7"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb62-8" class="hljs-ln-code"><a href="#cb62-8"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="Main_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+</div>
+</div>
+<p><img src="logo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</section></section>
     </div>
   </div>
 

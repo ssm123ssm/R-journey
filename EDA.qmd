@@ -1,0 +1,24 @@
+---
+title: "R Journey"
+author: "Supun Manathunga"
+format: 
+  revealjs:
+    incremental: true
+    transition: none
+    background-transition: fade
+    slide-number: true
+    multiplex: true
+editor: visual
+logo: logo.png
+css: logo.css
+---
+
+## R Journey
+
+`Introduction to data science with R`
+
+<https://github.com/ssm123ssm/R-journey>
+
+
+
+

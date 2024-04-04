@@ -17,3 +17,8 @@
 .space{
   height: 20px;
 }
+
+.red {
+  color: red;
+  font-weight: bold;
+}
