@@ -22,9 +22,11 @@ css: logo.css
 
 # Part 1 - Basics
 
-## R and RStudio
 
-## R
+
+## `R` and RStudio
+
+## Why `R`?
 
 ::: incremental
 > R is an open-source programming language and software environment designed for statistical computing, data analysis, and data visualization. It provides a powerful toolset for working with data, performing complex calculations, and creating high-quality graphics.
@@ -32,7 +34,7 @@ css: logo.css
 
 -   The R console is an interactive command-line interface that allows you to directly execute R commands and see the results immediately. It serves as a simple environment for writing and testing R code, as well as exploring data and experimenting with various functions and packages.
 
-## R and RStudio
+## RStudio
 
 > RStudio is a popular integrated development environment (IDE) for R. It provides a user-friendly interface that combines the R console, a code editor, and various panels for managing files, viewing data, plotting graphics, and accessing help documentation. RStudio streamlines the workflow for developing, debugging, and sharing R code and analyses.
 
@@ -325,8 +327,8 @@ dataFrame = data.frame(a = 1:6, b = 2:7)
 ::: {.fragment .fade-in}
 ```{r}
 #| echo: true
-library('dplyr')
-dataFrame %>% mutate(c = a + b)
+library(dplyr)
+mutate(dataFrame, c = a + b)
 ```
 :::
 
@@ -334,12 +336,12 @@ dataFrame %>% mutate(c = a + b)
 
 Here are some commonly used functions from the dplyr package in R:
 
--   select(): Subset columns from a data frame.
--   filter(): Subset rows based on conditions.
--   mutate(): Add new columns or modify existing ones.
--   summarise(): Compute summary statistics.
--   group_by(): Group data by one or more variables.
--   left_join(), right_join(), etc.: Combine data frames by matching rows.
+-   `select()`: Subset columns from a data frame.
+-   `filter()`: Subset rows based on conditions.
+-   `mutate()`: Add new columns or modify existing ones.
+-   `summarise()`: Compute summary statistics.
+-   `group_by()`: Group data by one or more variables.
+-   `left_join()`, `right_join()`, etc.: Combine data frames by matching rows.
 
 # Part 2 - Data Visualization
 
