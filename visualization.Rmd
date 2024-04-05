@@ -89,7 +89,11 @@ ggplot(data = murders, aes(x = population/10^6, y = total)) +
   ylab("Total number of murders (log scale)") +
   ggtitle("US Gun Murders in 2010") +
   theme_economist() +
-  scale_color_discrete(name = "Region") 
+  scale_color_discrete(name = "Region") +
+  theme(
+    axis.title.x = element_text(margin = margin(t = 10)),  # adjust margin for x-axis label
+    axis.title.y = element_text(margin = margin(r = 10))   # adjust margin for y-axis label
+  )
 
 
 ```
@@ -161,12 +165,26 @@ gapminder %>% filter(year == 2000) %>% ggplot(aes(x = gdp, y=life_expectancy, si
   scale_x_log10() +
   labs(x = "GDP per capita", y = "Life expectancy")
 
-gapminder  %>% ggplot(aes(x = gdp, y=life_expectancy, size = population, colour = continent)) +
+p_an <- gapminder  %>% ggplot(aes(x = gdp, y=life_expectancy, size = population, colour = continent)) +
   geom_point( alpha = 0.7) +
   scale_size(range = c(2, 12)) +
   scale_x_log10() +
   labs(x = "GDP per capita", y = "Life expectancy") +
   transition_time(year) +
-  labs(title = "Year: {frame_time}")
+  labs(title = "Year: {frame_time}") + theme_minimal()
+
+#save the animation
+#anim_save("gapminder.gif", animate(p_an, nframes = 100), path = "anim")
+
+```
+
+```{r}
+library(ggpubr)
+dslabs::gapminder %>% filter(year == 2000) %>%
+    mutate(continent = reorder(continent, gdp, FUN = median)) %>%
+    ggplot(aes(x = continent, y = gdp)) +
+    geom_boxplot() +
+    scale_y_log10() +
+  stat_compare_means()
 ```
 

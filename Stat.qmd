@@ -1,0 +1,227 @@
+---
+title: "R Journey"
+author: "Supun Manathunga"
+format: 
+  revealjs:
+    incremental: true
+    transition: none
+    background-transition: fade
+    slide-number: true
+editor: visual
+logo: logo.png
+css: logo.css
+---
+
+## R Journey
+
+`Introduction to data science with R`
+
+<https://github.com/ssm123ssm/R-journey>
+
+# Part 3 - Statistics
+
+## Summary Statistics
+
+::: fragment
+`Distribution` is one of the most important concepts in statistics. It is a function that shows the possible values for a variable and how often they occur.
+:::
+
+::: fragment
+For example, with categorical data, the distribution simply describes the proportion of each unique category.
+:::
+
+------------------------------------------------------------------------
+
+<div>
+
+Describe the distribution of the `states.region` dataset.
+
+</div>
+
+::: fragment
+```{r}
+table(state.region)
+```
+:::
+
+::: fragment
+```{r}
+library(tidyverse)
+table(state.region) %>% prop.table()
+```
+:::
+
+## Describing continuous data
+
+::: fragment
+### Case study: `Heights` dataset
+:::
+
+::: space
+:::
+
+::: fragment
+```{r}
+#| echo=T
+library(dslabs)
+data("heights")
+str(heights)
+```
+:::
+
+::: space
+:::
+
+::: fragment
+Similar to what the frequency table does for categorical data, the eCDF defines the distribution for numerical data.
+:::
+
+------------------------------------------------------------------------
+
+<div>
+
+```{r}
+theme_set(theme_minimal())
+heights %>% ggplot(aes(height)) + stat_ecdf()
+```
+
+</div>
+
+$F(a) = \mbox{Proportion of data points that are less than or equal to }a$
+
+## Histograms and Smoothed Density Plots
+
+Although the eCDF concept is widely discussed in statistics textbooks, it is not very popular in practice. It is difficult to see if the distribution is symmetric, what ranges contains 95% of the values.  Histograms are much preferred because they greatly facilitate answering such questions.
+
+---
+
+::: {}
+```{r}
+heights %>% ggplot(aes(height)) + geom_histogram(bins = 35)
+```
+:::
+
+
+---
+
+::: {}
+```{r}
+heights %>% ggplot(aes(height)) + geom_density()
+```
+:::
+
+In this plot, we no longer have sharp edges at the interval boundaries and many of the local peaks have been removed. Also, the scale of the y-axis changed from counts to density.
+
+## Stratified plots
+
+Lets try to stratify the data by `sex` and see how the distribution changes.
+
+:::{.fragment}
+
+The challenge is to contruct this plot using `ggplot2`.
+
+:::
+
+:::{.fragment}
+
+```{r}
+heights %>% ggplot(aes(height, fill = sex)) + geom_density(alpha = 0.3)
+```
+:::
+
+## Normal Distribution
+
+What percentage of the data is within 1 standard deviation of the mean?
+
+:::{.fragment}
+
+Lets simulate a normal distribution with mean 0 and standard deviation 1.
+
+:::
+
+
+:::{.fragment}
+
+```{r}
+#| echo=T
+
+set.seed(1)
+x <- rnorm(1e6)
+mean(x > -1 & x < 1)
+```
+:::
+
+:::{.fragment}
+
+```{r}
+#| echo=T
+pnorm(1) - pnorm(-1)
+```
+:::
+
+## Stratified boxplots
+
+:::{.fragment}
+Try to construct this plot using `ggplot2`.
+:::
+
+:::{.fragment}
+```{r}
+heights %>% ggplot(aes(y = height, x = sex, fill = sex)) + geom_boxplot(alpha = 0.3)
+```
+:::
+
+## Comparing means
+
+:::{.fragment}
+Lets compare the means of the two groups using a t-test.
+
+:::
+
+:::{.fragment}
+```{r}
+#| echo=T
+t.test(data = heights, height ~ sex)
+```
+:::
+---
+
+:::{}
+```{r}
+#| echo=T
+t.test(x = heights$height[heights$sex == 'Female'], y = heights$height[heights$sex == 'Male'])
+```
+:::
+:::{.space}
+:::
+
+:::{.fragment}
+```{r}
+#| echo=T
+heights$height[heights$sex == "Male"] %>% mean()
+```
+:::
+
+::: {.space}
+:::
+
+:::{.fragment}
+```{r}
+#| echo=T
+heights$height[!heights$sex == "Male"] %>% mean()
+```
+:::
+
+---
+
+We can calculate the test statistic and print the p-value on the plot, using `ggpubr` package.
+
+::: {.fragment}
+```{r}
+#| echo=T
+library(ggpubr)
+heights %>% ggplot(aes(y = height, x =sex, fill = sex)) + geom_boxplot(alpha = 0.3) + stat_compare_means(method = 't.test')
+```
+:::
+
+                       
