@@ -22,3 +22,9 @@
   color: red;
   font-weight: bold;
 }
+
+.bigtable {
+  font-size:smaller;
+  height: 80%;
+  overflow: auto;
+}

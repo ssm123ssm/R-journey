@@ -640,8 +640,194 @@ mean of x mean of y
 </div>
 </div>
 </div>
-<p><img src="logo.png" class="slide-logo"></p>
-<div class="footer footer-default">
+</section>
+<section class="slide level2">
+
+<h3 id="some-common-functions-available-in-stats-package">Some common functions available in <code>stats</code> package</h3>
+<div class="space">
+
+</div>
+<div class="bigtable">
+<table>
+<colgroup>
+<col style="width: 41%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Function</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mean(), median(), sd()</code></td>
+<td>Calculate mean, median, and standard deviation</td>
+</tr>
+<tr class="even">
+<td><code>t.test(), wilcox.test(), var.test()</code></td>
+<td>Hypothesis tests (t-test, Wilcoxon test, variance test)</td>
+</tr>
+<tr class="odd">
+<td><code>cor()</code></td>
+<td>Calculate correlations between variables</td>
+</tr>
+<tr class="even">
+<td><code>dnorm(), pnorm(), qnorm()</code></td>
+<td>Density, distribution, and quantile functions for the normal distribution</td>
+</tr>
+<tr class="odd">
+<td><code>dpois(), ppois(), qpois()</code></td>
+<td>Similar functions for the Poisson distribution</td>
+</tr>
+<tr class="even">
+<td><code>dbinom(), pbinom(), qbinom()</code></td>
+<td>Functions for the binomial distribution</td>
+</tr>
+<tr class="odd">
+<td><code>lm()</code></td>
+<td>Fit linear regression models</td>
+</tr>
+<tr class="even">
+<td><code>glm()</code></td>
+<td>Fit generalized linear models</td>
+</tr>
+<tr class="odd">
+<td><code>summary()</code></td>
+<td>Provide model summaries and other summary statistics</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="lady-tasting-tea" class="slide level2">
+<h2>Lady Tasting Tea</h2>
+<div class="fragment">
+<p>R.A Fisher was one of the first statisticians to formalize the concept of hypothesis testing. He was also a great tea lover. He was once challenged by a lady who claimed that she could tell whether the milk or the tea was added first to the cup. Fisher designed an experiment to test her claim.</p>
+</div>
+<div class="fragment">
+<p>If she could correctly identify 3 out of 4 milk-first cups correctly, would you be convinced that she could tell the difference?</p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="how-many-ways-to-select-4-cups-from-8">How many ways to select 4 cups from 8?</h3>
+<div class="space">
+
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span></p>
+</div>
+<div class="space">
+
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">choose</span>(<span class="dv">8</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 70</code></pre>
+</div>
+</div>
+</div>
+<div class="space">
+
+</div>
+<div class="fragment">
+<!-- -->
+<h3 id="how-many-ways-to-select-3-out-of-4-correctly">How many ways to select 3 out of 4 correctly?</h3>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">choose</span>(<span class="dv">4</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</div>
+<div class="space">
+
+</div>
+<div class="fragment">
+<!-- -->
+<h3 id="how-many-ways-to-incorrectly-select-1-out-of-4">How many ways to incorrectly select 1 out of 4 ?</h3>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">choose</span>(<span class="dv">4</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Therefore, the probability of selecting 3 out of 4 correctly is</p>
+<div class="space">
+
+</div>
+<p><span class="math inline">\(\frac{\binom{4}{3} \times \binom{4}{1}}{\binom{8}{4}} = \frac{4 \times 4}{70} = 0.2286\)</span></p>
+<div class="space">
+
+</div>
+<p>The probability of selecting all 4 out of 4 correctly is</p>
+<div class="space">
+
+</div>
+<p><span class="math inline">\(\frac{\binom{4}{4} \times \binom{4}{0}}{\binom{8}{4}} = \frac{1 \times 1}{70} = 0.0143\)</span></p>
+<div class="space">
+
+</div>
+</section>
+<section class="slide level2">
+
+<p>So, the <code>p-value</code>, or the probability of observing 3 out of 4 or more correct guesses, is</p>
+<div class="space">
+
+</div>
+<p><span class="math inline">\(0.2286 + 0.0143 = 0.2429\)</span></p>
+<div class="space">
+
+</div>
+</section>
+<section class="slide level2">
+
+<div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>),<span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">rownames</span>(tab)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Poured Before"</span>,<span class="st">"Poured After"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="fu">colnames</span>(tab)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Guessed before"</span>,<span class="st">"Guessed after"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4"></a>tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Guessed before Guessed after
+Poured Before              3             1
+Poured After               1             3</code></pre>
+</div>
+</div>
+</div>
+<div class="space">
+
+</div>
+<div class="space">
+
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">fisher.test</span>(tab, <span class="at">alternative=</span><span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="space">
+
+</div>
+<div class="space">
+
+</div>
+<div class="fragment">
+<!-- -->
+<h4 id="what-we-calculated-earlier-was-the-p-value-of-the-fishers-exact-test.">What we calculated earlier was the <code>p-value</code> of the Fisher’s exact test.</h4>
+</div>
+
+<img src="logo.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
 </section></section>
