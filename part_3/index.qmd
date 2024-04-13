@@ -1,0 +1,398 @@
+---
+title: "R Journey"
+author: "Supun Manathunga"
+format: 
+  revealjs:
+    incremental: true
+    transition: none
+    background-transition: fade
+    slide-number: true
+    chalkboard: true
+editor: visual
+logo: foot.png
+css: logo.css
+---
+
+## R Journey
+
+`Introduction to data science with R`
+
+<https://github.com/ssm123ssm/R-journey>
+
+::: space
+:::
+
+::: columns
+::: {.column width="50%"}
+::: space
+:::
+
+### `References`
+
+[Introduction to Data Science](https://rafalab.dfci.harvard.edu/dsbook-part-1/) [Advanced Data Science](https://rafalab.dfci.harvard.edu/dsbook-part-2/)
+
+By Rafael A. Irizarry
+:::
+
+::: {.column width="50%"}
+::: padded
+![](qr.png)
+:::
+:::
+:::
+
+# Part 3 - Statistics
+
+## Summary Statistics
+
+::: fragment
+`Distribution` is one of the most important concepts in statistics. It is a function that shows the possible values for a variable and how often they occur.
+:::
+
+::: fragment
+For example, with categorical data, the distribution simply describes the proportion of each unique category.
+:::
+
+------------------------------------------------------------------------
+
+<div>
+
+Describe the distribution of the `states.region` dataset.
+
+</div>
+
+::: fragment
+```{r}
+table(state.region)
+```
+:::
+
+::: fragment
+```{r}
+library(tidyverse)
+table(state.region) %>% prop.table()
+```
+:::
+
+## Describing continuous data
+
+::: fragment
+### Case study: `Heights` dataset
+:::
+
+::: space
+:::
+
+::: fragment
+```{r}
+#| echo=T
+library(dslabs)
+data("heights")
+str(heights)
+```
+:::
+
+::: space
+:::
+
+::: fragment
+Similar to what the frequency table does for categorical data, the eCDF defines the distribution for numerical data.
+:::
+
+------------------------------------------------------------------------
+
+<div>
+
+```{r}
+theme_set(theme_minimal())
+heights %>% ggplot(aes(height)) + stat_ecdf()
+```
+
+</div>
+
+$F(a) = \mbox{Proportion of data points that are less than or equal to }a$
+
+## Histograms and Smoothed Density Plots
+
+Although the eCDF concept is widely discussed in statistics textbooks, it is not very popular in practice. It is difficult to see if the distribution is symmetric, what ranges contains 95% of the values. Histograms are much preferred because they greatly facilitate answering such questions.
+
+------------------------------------------------------------------------
+
+<div>
+
+```{r}
+heights %>% ggplot(aes(height)) + geom_histogram(bins = 35)
+```
+
+</div>
+
+------------------------------------------------------------------------
+
+<div>
+
+```{r}
+heights %>% ggplot(aes(height)) + geom_density()
+```
+
+</div>
+
+In this plot, we no longer have sharp edges at the interval boundaries and many of the local peaks have been removed. Also, the scale of the y-axis changed from counts to density.
+
+## Stratified plots
+
+Lets try to stratify the data by `sex` and see how the distribution changes.
+
+::: fragment
+The challenge is to contruct this plot using `ggplot2`.
+:::
+
+::: fragment
+```{r}
+heights %>% ggplot(aes(height, fill = sex)) + geom_density(alpha = 0.3)
+```
+:::
+
+## Normal Distribution
+
+What percentage of the data is within 1 standard deviation of the mean?
+
+::: fragment
+Lets simulate a normal distribution with mean 0 and standard deviation 1.
+:::
+
+::: fragment
+```{r}
+#| echo=T
+
+set.seed(1)
+x <- rnorm(1e6)
+mean(x > -1 & x < 1)
+```
+:::
+
+::: fragment
+```{r}
+#| echo=T
+pnorm(1) - pnorm(-1)
+```
+:::
+
+## Stratified boxplots
+
+::: fragment
+Try to construct this plot using `ggplot2`.
+:::
+
+::: fragment
+```{r}
+heights %>% ggplot(aes(y = height, x = sex, fill = sex)) + geom_boxplot(alpha = 0.3)
+```
+:::
+
+## Comparing means
+
+::: fragment
+Lets compare the means of the two groups using a t-test.
+:::
+
+::: fragment
+```{r}
+#| echo=T
+t.test(data = heights, height ~ sex)
+```
+:::
+
+------------------------------------------------------------------------
+
+<div>
+
+```{r}
+#| echo=T
+t.test(x = heights$height[heights$sex == 'Female'], y = heights$height[heights$sex == 'Male'])
+```
+
+</div>
+
+::: space
+:::
+
+::: fragment
+```{r}
+#| echo=T
+heights$height[heights$sex == "Male"] %>% mean()
+```
+:::
+
+::: space
+:::
+
+::: fragment
+```{r}
+#| echo=T
+heights$height[!heights$sex == "Male"] %>% mean()
+```
+:::
+
+------------------------------------------------------------------------
+
+We can calculate the test statistic and print the p-value on the plot, using `ggpubr` package.
+
+::: fragment
+```{r}
+#| echo=T
+library(ggpubr)
+heights %>% ggplot(aes(y = height, x =sex, fill = sex)) + geom_boxplot(alpha = 0.3) + stat_compare_means(method = 't.test')
+```
+:::
+
+------------------------------------------------------------------------
+
+### Some common functions available in `stats` package
+
+::: space
+:::
+
+::: bigtable
+| **Function**                          | **Description**                                                           |
+|------------------------------|------------------------------------------|
+| `mean(), median(), sd()`              | Calculate mean, median, and standard deviation                            |
+| `t.test(), wilcox.test(), var.test()` | Hypothesis tests (t-test, Wilcoxon test, variance test)                   |
+| `cor()`                               | Calculate correlations between variables                                  |
+| `dnorm(), pnorm(), qnorm()`           | Density, distribution, and quantile functions for the normal distribution |
+| `dpois(), ppois(), qpois()`           | Similar functions for the Poisson distribution                            |
+| `dbinom(), pbinom(), qbinom()`        | Functions for the binomial distribution                                   |
+| `lm()`                                | Fit linear regression models                                              |
+| `glm()`                               | Fit generalized linear models                                             |
+| `summary()`                           | Provide model summaries and other summary statistics                      |
+:::
+
+## Lady Tasting Tea
+
+::: fragment
+R.A Fisher was one of the first statisticians to formalize the concept of hypothesis testing. He was also a great tea lover. He was once challenged by a lady who claimed that she could tell whether the milk or the tea was added first to the cup. Fisher designed an experiment to test her claim.
+:::
+
+::: fragment
+If she could correctly identify 3 out of 4 milk-first cups correctly, would you be convinced that she could tell the difference?
+:::
+
+------------------------------------------------------------------------
+
+### How many ways to select 4 cups from 8?
+
+::: space
+:::
+
+::: fragment
+$\binom{n}{k} = \frac{n!}{k!(n-k)!}$
+:::
+
+::: space
+:::
+
+::: fragment
+```{r}
+#| echo=T
+choose(8, 4)
+```
+:::
+
+::: space
+:::
+
+::: fragment
+### How many ways to select 3 out of 4 correctly?
+:::
+
+::: fragment
+```{r}
+#| echo=T
+choose(4, 3)
+```
+:::
+
+::: space
+:::
+
+::: fragment
+### How many ways to incorrectly select 1 out of 4 ?
+:::
+
+::: fragment
+```{r}
+#| echo=T
+choose(4, 1)
+```
+:::
+
+------------------------------------------------------------------------
+
+Therefore, the probability of selecting 3 out of 4 correctly is
+
+::: space
+:::
+
+$\frac{\binom{4}{3} \times \binom{4}{1}}{\binom{8}{4}} = \frac{4 \times 4}{70} = 0.2286$
+
+::: space
+:::
+
+The probability of selecting all 4 out of 4 correctly is
+
+::: space
+:::
+
+$\frac{\binom{4}{4} \times \binom{4}{0}}{\binom{8}{4}} = \frac{1 \times 1}{70} = 0.0143$
+
+::: space
+:::
+
+------------------------------------------------------------------------
+
+So, the `p-value`, or the probability of observing 3 out of 4 or more correct guesses, is
+
+::: space
+:::
+
+$0.2286 + 0.0143 = 0.2429$
+
+::: space
+:::
+
+------------------------------------------------------------------------
+
+<div>
+
+```{r}
+#| echo=T
+tab <- matrix(c(3,1,1,3),2,2)
+rownames(tab)<-c("Poured Before","Poured After")
+colnames(tab)<-c("Guessed before","Guessed after")
+tab
+```
+
+</div>
+
+::: space
+:::
+
+::: space
+:::
+
+::: fragment
+```{r}
+#| echo=T, eval=F
+
+fisher.test(tab, alternative="greater")
+```
+:::
+
+::: space
+:::
+
+::: space
+:::
+
+::: fragment
+#### What we calculated earlier was the `p-value` of the Fisher's exact test.
+:::

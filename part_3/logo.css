@@ -1,0 +1,35 @@
+.reveal .slide-logo {
+  height: 200px !important;
+  bottom: -64px !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.upper{
+  position: absolute;
+  top:0px;
+  
+}
+
+.relative{
+  position: relative;
+}
+
+.space{
+  height: 25px;
+}
+
+.red {
+  color: red;
+  font-weight: bold;
+}
+
+.bigtable {
+  font-size:smaller;
+  height: 80%;
+  overflow: auto;
+}
+
+.padded{
+  padding: 20px;
+}
