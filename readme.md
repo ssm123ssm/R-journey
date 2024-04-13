@@ -1,6 +1,7 @@
 # R Journey: A Comprehensive Introduction to R Programming
 
-Check out the live project at: [![R Journey](https://img.shields.io/badge/R-Journey-brightgreen?style=for-the-badge)](https://r-journey.netlify.app/)
+Check out the live project at: [![R Journey](https://img.shields.io/badge/R-journey-blue
+)](https://r-journey.netlify.app/)
 
 R Journey is an open-source educational project designed to provide a comprehensive introduction to the R programming language. It covers a wide range of topics, including R basics, data visualization, statistics, and machine learning, all with real-world case studies. This project is inspired by the R Series by Professor Rafael Irizarry and his books.
 
