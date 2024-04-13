@@ -1,6 +1,6 @@
 .reveal .slide-logo {
-  height: 100px !important;
-  width: 140px !important;
+  height: 200px !important;
+  bottom: -64px !important;
   max-width: unset !important;
   max-height: unset !important;
 }
@@ -8,6 +8,7 @@
 .upper{
   position: absolute;
   top:0px;
+  
 }
 
 .relative{
@@ -27,4 +28,8 @@
   font-size:smaller;
   height: 80%;
   overflow: auto;
+}
+
+.padded{
+  padding: 20px;
 }
