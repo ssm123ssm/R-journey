@@ -254,7 +254,7 @@ heights %>% ggplot(aes(y = height, x =sex, fill = sex)) + geom_boxplot(alpha = 0
 
 ::: bigtable
 | **Function**                          | **Description**                                                           |
-|------------------------------|------------------------------------------|
+|---------------------------------------|---------------------------------------------------------------------------|
 | `mean(), median(), sd()`              | Calculate mean, median, and standard deviation                            |
 | `t.test(), wilcox.test(), var.test()` | Hypothesis tests (t-test, Wilcoxon test, variance test)                   |
 | `cor()`                               | Calculate correlations between variables                                  |
